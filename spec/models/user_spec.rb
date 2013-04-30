@@ -31,6 +31,14 @@ describe User do
   it { should_not be_admin }
   it { should be_valid }
   
+#  expect do
+#    @user.update_attributes(:admin => true)
+#  end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)
+ 
+  describe "cannot change admin" do
+    it { expect { @user.update_attributes(:admin => true) }.to raise_error }
+  end
+  
   describe "with admin attribute set to 'true'" do
     before do
       @user.save!
